@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Happy Birthday Arezo ✨</title>
+
+  <!-- Google Fonts & Confetti Script -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Outfit:wght@400;600;800&family=Pacifico&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <!-- Audio Elements -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="my-song.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Special Audio for First Gift Box -->
+  <audio id="arezoSong" preload="auto">
+    <source src="Arezo.mp3" type="audio/mpeg">
+  </audio>
+
+  <audio id="paperSfx" preload="auto">
+    <source src="https://assets.mixkit.co/active_storage/sfx/2403/2403-preview.mp3" type="audio/mpeg">
+  </audio>
+
+  <button class="music-control" onclick="toggleMusic()" id="musicBtn">
+    🎵 Play Song
+  </button>
+
+  <!-- PAGE 1: Banner Landing Screen -->
+  <div id="page1" class="page active landing-screen">
+    <div class="party-bunting"></div>
+
+    <div class="landing-balloon balloon-left">🎈</div>
+    <div class="landing-balloon balloon-right">🎈</div>
+    <div class="sparkle-land star-1">✦</div>
+    <div class="sparkle-land star-2">✦</div>
+    <div class="sparkle-land star-3">✦</div>
+    <div class="smiley-face">🙂</div>
+    <div class="badge-stamp">HAPPY<br>BIRTHDAY</div>
+
+    <div class="landing-layout">
+      <div class="landing-left">
+        <h1 class="bubble-title">Happy<br><span class="pink-text">Birthday</span></h1>
+        <div class="date-pill">★ 30 November ★</div>
+        <button id="unlockBtn" class="pill-btn" onclick="if(bgMusic) { bgMusic.play().catch(()=>{}); isPlaying = true; } nextPage(2);">
+          Click Here Arezo ✉️
+        </button>
+      </div>
+
+      <div class="landing-right">
+        <div class="avatar-frame">
+          <img src="doll.jpg" alt="Arezo" class="user-photo">
+        </div>
+        <div class="name-ribbon">Dear Arezo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE 2: ANIMATED 3-TIER CAKE -->
+  <div id="page2" class="page">
+    <div class="birthday-container">
+      <div class="sparkle">✦</div>
+      <div class="sparkle">✧</div>
+      <div class="sparkle">✦</div>
+      <div class="sparkle">✧</div>
+
+      <div class="plate"></div>
+
+      <div class="cake-wrapper">
+        <div class="layer layer-bottom">
+          <div class="frosting-top"></div>
+        </div>
+        <div class="layer layer-middle">
+          <div class="frosting-top"></div>
+        </div>
+        <div class="layer layer-top">
+          <div class="frosting-top"></div>
+          <div class="drip one"></div>
+          <div class="drip two"></div>
+          <div class="drip three"></div>
+        </div>
+        <div class="candle">
+          <div class="wick"></div>
+          <div class="flame"></div>
+        </div>
+      </div>
+
+      <div class="message">
+        <h1>happy birthday!</h1>
+        <p>Arezo</p>
+        <button class="action-btn glow-effect" style="margin-top: 10px;" onclick="nextPage(3)">Read Your Letter ✉️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTAINER FOR PAGES 3 - 5 -->
+  <div class="container-wrapper" id="innerContainerWrapper" style="display: none;">
+    <div class="container">
+
+      <!-- PAGE 3: Letter Reveal with Typewriter Effect -->
+      <div id="page3" class="page">
+        <h1>A Letter For You ✉️</h1>
+        <p class="subtitle">Click the envelope to open your letter!</p>
+
+        <div class="envelope-wrapper" id="envelopeWrapper" onclick="openEnvelope()">
+          <div class="envelope">
+            <div class="envelope-flap"></div>
+            <div class="envelope-pocket"></div>
+            <div class="envelope-click-label">💌 Click to Open</div>
+          </div>
+        </div>
+
+        <div class="letter-text-wrapper" id="letterCard">
+          <div id="typewriterContainer"></div>
+        </div>
+
+        <div class="btn-group" style="margin-top: 25px;">
+          <button class="secondary-btn" onclick="nextPage(2)">⬅️ Back</button>
+          <button id="celebrateBtn" class="action-btn glow-effect" style="display: none;" onclick="nextPage(4)">Open Your Presents 🎁</button>
+        </div>
+      </div>
+
+      <!-- PAGE 4: Birthday Presents Page -->
+      <div id="page4" class="page">
+        <div class="icon-bounce">🎁</div>
+        <h1>Your Birthday Gifts!</h1>
+        <p class="subtitle">Click on each gift box to unwrap your special surprises!</p>
+
+        <div class="presents-grid">
+          <!-- Gift Box 1: Song -->
+          <div class="present-box" id="gift1" onclick="openGift1(this)">
+            <div class="gift-icon">🎁</div>
+            <span class="gift-label">Click to Unwrap #1</span>
+          </div>
+
+          <!-- Gift Box 2: Interactive Quiz -->
+          <div class="present-box" id="gift2" onclick="openGift2(this)">
+            <div class="gift-icon">🎁</div>
+            <span class="gift-label">Click to Unwrap #2</span>
+          </div>
+
+          <!-- Gift Box 3: Floating Flip Card -->
+          <div class="present-box" id="gift3" onclick="openGift3(this)">
+            <div class="gift-icon">🎁</div>
+            <span class="gift-label">Click to Unwrap #3</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 30px;">
+          <button id="finalMsgBtn" class="action-btn glow-effect disabled-btn" disabled onclick="nextPage(5)">Final Message ✨</button>
+        </div>
+
+        <div style="margin-top: 15px;">
+          <button class="secondary-btn" onclick="nextPage(3)">⬅️ Back</button>
+        </div>
+      </div>
+
+      <!-- PAGE 5: Closing Page -->
+      <div id="page5" class="page">
+        <div class="closing-message">
+          <p class="cursive-red-text">always smile 😊❤️</p>
+          <p class="ps-note">P.S. You can come back and open the gifts again anytime.</p>
+        </div>
+
+        <div class="btn-group" style="margin-top: 35px;">
+          <button class="secondary-btn" onclick="nextPage(4)">⬅️ Back</button>
+          <button class="action-btn glow-effect" onclick="nextPage(1)">Start Over 🔄</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- External JavaScript -->
+  <script src="./script.js"></script>
+</body>
+</html>
